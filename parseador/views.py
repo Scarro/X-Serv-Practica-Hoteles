@@ -96,7 +96,7 @@ def recargar(self):
                     number += 1
     for enlace in enlaces:
         enlace.save()
-    return ;
+    return None
 
 def parsearAlojamiento(alojamiento_id, idioma):
     alojamiento = Alojamiento.objects.get(id=alojamiento_id)
@@ -119,6 +119,7 @@ def parsearAlojamiento(alojamiento_id, idioma):
 
 
 def actualizarAlojamientos(request):
+    recargar(request)
     try:
         Alojamiento.objects.all().delete()
     except:
