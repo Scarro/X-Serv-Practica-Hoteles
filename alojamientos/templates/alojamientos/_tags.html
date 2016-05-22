@@ -1,0 +1,9 @@
+{% if alojamiento.tags %}
+    {% for tag in alojamiento.tags.all %}
+        {% if tag.tipo == 1 %}
+            <span class="label label-default">{{ tag.nombre }}</span>
+        {% else %}
+            <span class="label label-success">{{ tag.nombre }}</span>
+        {% endif %}
+    {% endfor %}
+{% endif %}

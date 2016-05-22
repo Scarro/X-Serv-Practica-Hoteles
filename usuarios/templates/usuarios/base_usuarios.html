@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if usuario %}
+        <div class="container-fluid">
+        {% if usuario.titulo %}
+            <h2 class="texto-centrado margen-bot cornerfont">{{usuario.titulo}}</h2>
+        {% else %}
+            <h2 class="texto-centrado margen-bot cornerfont">Página de {{usuario.user.username}}.</h2>
+        {% endif %}
+        {% if mismo %}
+            <div class="row">
+                <div class="col-md-3 col-lg-2 col-md-offset-1">
+                    <div class="list-group">
+                        <a href="/{{usuario.user.username}}/editar_titulo" class="list-group-item">Editar Titulo</a>
+                        <a href="/{{usuario.user.username}}/editar_color" class="list-group-item">Editar Color de Fondo</a>
+                        <a href="/{{usuario.user.username}}/editar_size" class="list-group-item">Editar Tamaño</a>
+                        <a href="/{{usuario.user.username}}/editar_email" class="list-group-item">Editar Email</a>
+                        <a href="{% url 'usuarios.xml' nombre %}" class="list-group-item">XML de los hostales</a>
+<!--                        <a href="/{{usuario.user.username}}/editar_contrasena" class="list-group-item">Editar contraseña</a>-->
+                    </div>
+                </div>
+                <div class="col-md-7 col-md-offset-1">
+        {% else %}
+            <div class="row">
+        {% endif %}        
+                    {% block usuarios_content %}{% endblock usuarios_content %}
+                </div>
+            </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-12">
+                <p>No existe {{ nombre }}</p>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+{% endblock content %}

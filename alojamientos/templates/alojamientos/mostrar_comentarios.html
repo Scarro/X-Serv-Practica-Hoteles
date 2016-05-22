@@ -1,0 +1,18 @@
+<div class="col-sm-10 col-md-offset-1">
+    <h4>{{ comentarios.count }} comentarios.</h4>
+    {% for comentario in comentarios %}
+    <div class="panel panel-default">
+        <p class="panel-heading"><strong>{{ comentario.title }}</strong><br>
+            <small>
+<!--                <strong>Por: </strong>{{ comentario.usuario.username }} -->
+                <strong>Hace: </strong>{{ comentario.creado|timesince }}
+<!--                   <strong>El: </strong>{{ article.create_at|date:'d F Y' }}-->
+            </small>
+        </p>
+        <p class="panel-body">
+            {{ comentario.body }} 
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur earum, commodi perspiciatis consectetur cumque error omnis explicabo odio enim non blanditiis minima ab repudiandae doloribus a obcaecati debitis iste placeat.
+        </p>
+    </div>
+    {% endfor %}
+</div>

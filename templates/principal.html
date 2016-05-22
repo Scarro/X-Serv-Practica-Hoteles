@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Alojamientos{% endblock title %}
+
+{% block content %}
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <h2 class="texto-centrado cornerfont margen-bot">Alojamientos más comentados</h2>
+                    {% if alojamientos %}
+                        {% for alojamiento in alojamientos %}
+                        <div class="panel panel-danger">
+                                    <div class="panel-body">
+                                        <div class="col-md-7">
+                                            <p><a href="{{alojamiento.url}}">{% autoescape off %}{{ alojamiento.nombre }}{% endautoescape %}</a></p>
+                                            <p> {{ alojamiento.calle }}, {{ alojamiento.cpostal }} {{ alojamiento.ciudad }} {{ alojamiento.pais }}</p>
+                                        </div>  
+                                        <div class="col-md-5">
+                                            {% if alojamiento.foto_alojamiento %}
+                                                <img class="img-responsive" src="{{ alojamiento.foto_alojamiento.all.0.url }}" alt="{% autoescape off %}{{ alojamiento.foto_alojamiento.all.0}}{% endautoescape %}">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <p><a href="{% url 'alojamientos.detalle' alojamiento.id 'es'%}">Mas información...</a></p>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    {% else %}
+                        <br>
+                        <p class="texto-centrado">Actualmente no hay alojamientos comentados.</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-3 col-md-offset-1">
+                    <div class="list-group">
+                        <h2 class="texto-centrado cornerfont margen-bot">Páginas de usuario</h2>
+                        {% for usuario in usuarios %}
+                            <a class="list-group-item texto-centrado" href="{{ usuario.user.username }}">
+                            {% if usuario.titulo %}
+                                {{ usuario.titulo }} - {{ usuario.nombre }}
+                            {% else %}
+                                Página de {{ usuario.user.username }}
+                            {% endif %}
+                            </a></li>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

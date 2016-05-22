@@ -1,0 +1,29 @@
+{% extends 'alojamientos/base_alojamientos.html' %}
+
+<!-- Se podria poner glyphicons dependiendo de su categoria (hotel, albergue...) y de su subcategoria (estrellas)-->
+{% block alojamientos_content %}
+    {% if alojamientos %}
+        {% if buscador %}
+            {% include 'alojamientos/buscador.html' %}
+        {% endif %}
+        <h2 class="texto-centrado cornerfont margen-bot">Alojamientos disponibles:</h2>
+        <div class="list-group col-md-6 col-md-offset-1">
+            {% for alojamiento in alojamientos %}
+                <a class="list-group-item" href="{{alojamiento.id}}/es">{% autoescape off %}{{ alojamiento.nombre }}{% endautoescape %}</a></li>
+            {% endfor %}
+            {% if is_paginated %}
+                <ul id="pagination-alojamientos" class="pagination">
+                    <p>Mostrando {{ page_obj.start_index }}-{{page_obj.end_index}} de {{paginator.count}}</p>
+                    {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    {% else %}
+        <h2>No hay alojamientos disponibles.</h2>
+    {% endif %}
+{% endblock alojamientos_content %}

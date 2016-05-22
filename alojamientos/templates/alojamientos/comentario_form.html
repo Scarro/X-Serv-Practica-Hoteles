@@ -1,0 +1,12 @@
+{% extends 'alojamientos/detalle.html' %}
+
+{% block title %}{{ titulo }}{% endblock title %}
+
+{% block alojamientos_content %}
+    <h2 class="page-header ">{{ titulo }}</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{{ nombre_btn }}</button>
+    </form>
+{% endblock alojamientos_content %}

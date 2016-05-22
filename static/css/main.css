@@ -1,0 +1,44 @@
+@font-face
+{
+   font-family: "CornerStone";
+   src: url("{{BASE_DIR}}media/Cornerstone.ttf") format("truetype"),
+}
+
+body { 
+    margin: 70px 0 20px 0;
+}
+
+.margen-top {
+    margin-top: 10px;
+}
+
+.margen-bot {
+    margin-bottom: 30px;
+}
+
+.padding-top {
+    padding-top: 30px;
+}
+
+.footer {
+    color:white !important;
+    text-align:center;
+}
+
+.texto-centrado {
+    text-align:center;
+}
+
+.minimo-height {
+    min-height: 965px;
+}
+
+.cornerfont {
+    font-family: "CornerStone";
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.fotos-detalle {
+    padding-top: 30px;
+}

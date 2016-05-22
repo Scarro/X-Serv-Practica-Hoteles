@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Alojamientos{% endblock title %}
+
+{% block content %}
+    <h1>About</h1>
+    <p>Servicios y Aplicaciones Telemáticas<p>
+    <p>Sergio Carro Albarrán</p>
+    <p>Usuario root personal: guybrush </p>
+    Nombres y contraseñas de los usuarios del sitio:
+    <ul>
+        <li>nombre = mirinda   contraseña = 12345</li>
+        <li>nombre = daniel   contraseña = 12345</li>
+        <li>nombre = charlestone   contraseña= 12345</li>
+    </ul>
+
+    <p>Peculiaridades:</p>
+    <ul>
+        <li>Agregado sistema de registro para no tener que utilizar el admin de django</li>
+        <li>El XML generado es simple, no contiene los mismos campos que los XML de la comunidad de madrid</li>
+        <li>Falta agregar el momento en que se seleccionó un alojamiento</li>
+        <li>Los límites del tamaño de letra son (1,30) y está implementado para cambiar lo situado en el cuerpo de la aplicación (no cambia nada tanto de la barra superior del navegador ni los headers)</li>
+        <li>Al igual que con la letra, está implementado para cambiar el color de fondo del cuerpo</li>
+        <li>Agregados tanto el cambio de email como algunas otras funciones pero por falta de tiempo no puedo comentar cada una de ellas, en el vídeo puede verse la funcionalidad general</li>
+        <li>El estilo está implementado con bootstrap así como mi propio main.css para hacer más visible el trabajo</li>
+        <li>Me habría gustado implementar muchas cosas así como hacer un "help" mejor pero por falta de tiempo no he podido</li>
+    </ul>
+
+    <p>Funcionalidades Opcionales:<p>
+    <ul>
+        <li>Registro de usuarios</li>
+        <li>Algunos elementos como section footer ... de html5 usados, pero no dió tiempo a un rediseño más profundo</li>
+    </ul>
+    <p>URL video:</p>
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'usuarios/base_usuarios.html' %}
+
+{% block title %}Seleccionados{% endblock title %}
+
+{% block usuarios_content %}
+    {% if seleccionados %}
+        <div class="row">
+            {% if not mismo %}
+            <div class="col-md-2 col-md-offset-2">
+                <div class="list-group">
+                    <a href="{% url 'usuarios.xml' nombre %}" class="list-group-item">XML de los hostales</a>
+                </div>
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+            {% endif %}
+                {% for alojamiento in seleccionados %}
+                <div class="panel panel-danger">
+                    <div class="panel-body">
+                        <div class="col-md-7">
+                            <p><a href="{{alojamiento.url}}">{% autoescape off %}{{ alojamiento.nombre }}{% endautoescape %}</a></p>
+                            <p> {{ alojamiento.calle }}, {{ alojamiento.cpostal }} {{ alojamiento.ciudad }} {{ alojamiento.pais }}</p>
+                        </div>  
+                        <div class="col-md-5">
+                            {% if alojamiento.foto_alojamiento %}
+                                <img class="img-responsive" src="{{ alojamiento.foto_alojamiento.all.0.url }}" alt="{% autoescape off %}{{ alojamiento.foto_alojamiento.all.0}}{% endautoescape %}">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <p><a href="{% url 'alojamientos.detalle' alojamiento.id 'es' %}">Mas información...</a></p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if is_paginated %}
+                    <ul id="pagination-alojamientos" class="pagination">
+                        <p>Mostrando {{ page_obj.start_index }}-{{page_obj.end_index}} de {{paginator.count}}</p>
+                        {% if page_obj.has_previous %}
+                            <li><a href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <li><a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock usuarios_content %}

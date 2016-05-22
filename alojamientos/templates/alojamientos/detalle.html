@@ -1,0 +1,102 @@
+{% extends 'alojamientos/base_alojamientos.html' %}
+
+{% block alojamientos_content %}
+    {% if alojamiento %}
+        <div class="row">
+            <div class="col-md-5 col-lg-5 col-md-offset-1">
+                <h2>{% autoescape off %}{{ alojamiento.nombre }}{% endautoescape %}</h2>
+                <p><small><strong>Categorias: </strong>{% include 'alojamientos/_tags.html' %}</small></p>
+                {% if alojamiento.descripcion %}
+                    {% if idioma %}
+                        <p>{{ idioma }}</p>
+                    {% else %}
+                        <p>{{ alojamiento.descripcion }}<p>
+                    {% endif %}
+                {% else %}
+                    <p>Sin descripción</p>
+                {% endif %}
+                {% if alojamiento.telefono or alojamiento.email %}
+                    <p>Contacto: 
+                    {% if alojamiento.telefono %}
+                        {{ alojamiento.telefono}}
+                        {% if alojamiento.email %}
+                            {% if alojamiento.telefono %}
+                                <strong>&#47;</strong>
+                            {% endif %}
+                            {{ alojamiento.email }}
+                        {% endif %}
+                    {% endif %}</p>
+                {% endif %}
+            </div>
+            <div class="col-sm-9 col-md-4 col-lg-4 col-md-offset-1 fotos-detalle">
+                {% if fotos %}
+                    {% if fotos.count > 1 %}</p>
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                {% for imagen in fotos %}
+                                    <li data-target="#myCarousel" data-slide-to="{{forloop.counter0}}" class="{%if forloop.counter0 == 0 %}active{% endif %}"></li>
+                                {% endfor %}
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                {% for imagen in fotos %}
+                                    <div class="item {%if forloop.counter0 == 0 %}active{% endif %}">
+                                        <img class="" src="{{imagen.url}}" alt="{{imagen.url}}">
+                                    </div>
+                                {% endfor %}
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <img class='img-responsive' src="{{imagen.url}}" alt="{{imagen}}">
+                    {% endif %} 
+                {% endif %}
+            </div>
+        </div>
+        <div class="row margen-top">
+            <div class="col-md-6 col-md-offset-1 ">
+                <p><strong style="text-decoration:underline;">Mas información:</strong> <a href="{{alojamiento.url}}">{{alojamiento.nombre}}</a></p>
+                <p>
+                    {{ alojamiento.calle }}, {{ alojamiento.cpostal }} {{ alojamiento.ciudad }} {{ alojamiento.pais }}
+                </p>
+                {% if alojamiento.latitud %}
+                <p>Coordenadas: ({{ alojamiento.latitud }}, {{ alojamiento.longitud }})</p>
+                {% endif %}
+            </div>
+            <div class="col-md-5 padding-top">
+                <a href="{% url 'alojamientos.detalle' alojamiento.id 'es' %}" class="btn btn-info">Español</a>
+                <a href="{% url 'alojamientos.detalle' alojamiento.id 'en' %}" class="btn btn-info">Ingles</a>
+                <a href="{% url 'alojamientos.detalle' alojamiento.id 'fr' %}" class="btn btn-info">Frances</a>
+                <a href="{% url 'alojamientos.detalle' alojamiento.id 'ger' %}" class="btn btn-info">Aleman</a>
+                <a href="{% url 'alojamientos.detalle' alojamiento.id 'it' %}" class="btn btn-info">Italiano</a>
+                <a href="{% url 'alojamientos.detalle' alojamiento.id 'pg' %}" class="btn btn-info">Portuges</a>
+                <a href="{% url 'alojamientos.detalle' alojamiento.id 'rs' %}" class="btn btn-info">Ruso</a>
+            </div>
+            
+        </div>
+
+
+        {% if perms.alojamientos.add_comentario %}
+            <div class="col-xs-8 col-md-offset-1">
+                <a href="{% url 'alojamientos.comentario' alojamiento.id %}" class="btn btn-primary margen-bot margen-top">Añadir comentario</a>
+            </div>
+        {% endif %}
+
+        {% if not seleccionado and user.is_authenticated %}
+            <div class="col-xs-8 col-md-offset-1">
+                <a href="{% url 'alojamientos.seleccionar' alojamiento.id %}" class="btn btn-danger margen-bot margen-top">Seleccionar</a>
+            </div>
+        {% endif %}
+
+        {% if comentarios %}
+            {% include 'alojamientos/mostrar_comentarios.html' %}
+        {% endif %}
+    {% endif %}
+
+{% endblock alojamientos_content %}
