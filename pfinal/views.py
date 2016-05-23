@@ -26,7 +26,13 @@ def index_view(request):
     return render(request, 'principal.html', context)
 
 def about(request):
+    usuarios = PerfilUsuario.objects.all()
+    usercolor = colorSet(request.user.username)
+    usersize = sizeSet(request.user.username)
     context = {
-        'about': 'about'
+        'about': 'about',
+        'usuarios': usuarios,
+        'usercolor': usercolor,
+        'usersize': usersize,
     }
     return render(request, 'about.html', context)
