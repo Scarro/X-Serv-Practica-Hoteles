@@ -262,6 +262,4 @@ def xml_view(request, usuario):
 
     data = serializers.serialize('xml', seleccionados)
 
-    print data
-
     return HttpResponse(data, content_type='application/xml')

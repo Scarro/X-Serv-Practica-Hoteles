@@ -60,7 +60,6 @@ def detalle_view(request, alojamiento_id, idioma):
     except:
         pass
     usuario = PerfilUsuario(nombre=request.user.username)
-#    print Alojamiento.objects.filter(seleccionado__nombre=request.user.username)
     try:
         alojamiento.seleccionado.get(nombre=request.user.username)
         seleccionado = True
@@ -135,7 +134,6 @@ def seleccionar(request, alojamiento_id):
 @login_required
 def crear_comentario(request, alojamiento_id):
     form = ComentarioCreateForm
-    print alojamiento_id
     
     if request.method == "POST":
         form = ComentarioCreateForm(request.POST, request.FILES)

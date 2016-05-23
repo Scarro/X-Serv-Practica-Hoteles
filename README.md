@@ -24,4 +24,4 @@ Funcionalidades Opcionales:
     *Algunos elementos como section footer ... de html5 usados, pero no dió tiempo a un rediseño más profundo
 
 URL video:
-
+https://www.youtube.com/watch?v=PzvZ0BI7kg4
